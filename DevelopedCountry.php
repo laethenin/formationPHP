@@ -8,11 +8,11 @@ class DevelopedCountry extends Country {
         $this->gdp = $gdp;
     }
 
-    /*public function setGdp($gdp) {
-        $this->gdp = $gdp;
-    }*/
+    public function getGdp() {
+        return $this->gdp;
+    }
 
     public function getInfo(){
-        echo "Le nom du pays est : " . $this->name . "<br>" . "Sa capitale est : " . $this->capital . "<br>" . "Sa population est de : " . $this->population . " millions d'habitants" . "<br>" . "Il est situé sur le continent : " . $this->continent . "<br>" . "Son PIB en milliards de dollars est de : " . $this->gdp . "<br><br>";
+        echo "Le nom du pays est : " . $this->getName() . "<br>" . "Sa capitale est : " . $this->getCapital() . "<br>" . "Sa population est de : " . $this->getPopulation() . " millions d'habitants" . "<br>" . "Il est situé sur le continent : " . $this->getContinent() . "<br>" . "Son PIB en milliards de dollars est de : " . $this->getGdp() . "<br><br>";
     }
 }
