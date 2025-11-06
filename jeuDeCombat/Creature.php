@@ -50,7 +50,7 @@ abstract class Creature {
 
     public function recevoirDegats($degats) {
         $this->sante = $this->sante - $degats;
-        echo $this->nom . " n'a plus que " . $this->sante . " points de santé.<br><br>";
+        echo $this->nom . " n''a plus que " . $this->sante . " points de santé.<br><br>";
         if ($this->sante <= 0) {
             echo $this->nom . " est mort.<br><br>";
         }
