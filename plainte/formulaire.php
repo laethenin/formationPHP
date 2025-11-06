@@ -38,7 +38,7 @@ if (isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['sujet']) && 
 <div class="container-custom">
     <div class="card mb-4">
         <div class="card-header text-center">
-            <h1 class="mb-0">📋 Gestion de Plaintes</h1>
+            <h1 class="mb-0">📋 Gestion des Plaintes</h1>
         </div>
         <div class="card-body">
             <p class="text-center text-muted">Merci de remplir ce formulaire afin que nous puissions traiter votre
@@ -114,7 +114,7 @@ if (isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['sujet']) && 
     </div>
 
     <footer class="text-center mt-4 text-black">
-        <p class="mb-0">© <?php echo date('Y'); ?> - Système de gestion des plaintes pour gens blasés</p>
+        <p class="mb-0">© <?php echo date('Y'); ?> - Gestion des plaintes pour persos de mangas blasés</p>
     </footer>
 </div>
 

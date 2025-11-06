@@ -7,13 +7,13 @@ $sql = "SELECT * FROM plaintes";
 $query = $bdd->query($sql);
 $plaintes = $query->fetchAll();
 
-if (isset($_GET['id']) && !empty($_GET['id'])){
+if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "DELETE FROM plaintes WHERE id = :id";
     $query = $bdd->prepare($sql);
     $verif = $query->execute(['id' => $id]);
 
-    if ($verif){
+    if ($verif) {
         header("Location:plaintes.php");
         exit();
     }
@@ -30,43 +30,53 @@ if (isset($_GET['id']) && !empty($_GET['id'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="container">
-    <a href="formulaire.php"><button onclick>Ajouter une plainte</button></a>
-    <div class="row">
-        <table class="table table-light">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nom</th>
-                    <th>Sujet</th>
-                    <th>Message</th>
-                    <th>Date de la plainte</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($plaintes as $item){?>
-                <tr>
-                    <td><?php echo $item['id'];?></td>
-                    <td><?php echo $item['nom'];?></td>
-                    <td><?php echo $item['sujet'];?></td>
-                    <td><?php echo $item['message'];?></td>
-                    <td><?php echo $item['date_plainte'];?></td>
-                    <td>
-                        <?php if ($item['visible'] == 1) { ?>
-                            <span class="badge bg-success">Visible</span>
-                        <?php } else { ?>
-                            <span class="badge bg-danger">Invisible</span>
-                        <?php } ?>
-                    </td>
-                    <td>
-                        <a class="btn btn-danger" href="plaintes.php?id=<?php echo $item['id'];?>">Supprimer</a>
-                        <a class="btn btn-warning" href="plaintes.php?id=<?php echo $item['id'];?>">Modifier</a>
-                    </td>
-                </tr>
-            <?php } ?>
-            </tbody>
-        </table>
+<div class="card mb-4">
+    <div class="card-header text-center">
+        <h1 class="mb-0">📋 Liste des plaintes</h1>
     </div>
+    <div class="card-body">
+        <p class="text-center text-muted">Voici la liste des plaintes reçues.</p>
+    </div>
+</div>
+<a href="formulaire.php">
+    <button onclick>Ajouter une plainte</button>
+</a>
+<div class="row">
+    <table class="table table-light">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Sujet</th>
+            <th>Message</th>
+            <th>Date de la plainte</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($plaintes as $item) { ?>
+            <tr>
+                <td><?php echo $item['id']; ?></td>
+                <td><?php echo $item['nom']; ?></td>
+                <td><?php echo $item['sujet']; ?></td>
+                <td><?php echo $item['message']; ?></td>
+                <td><?php echo $item['date_plainte']; ?></td>
+                <td>
+                    <?php if ($item['visible'] == 1) { ?>
+                        <span class="badge bg-success">Visible</span>
+                    <?php } else { ?>
+                        <span class="badge bg-danger">Invisible</span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="plaintes.php?id=<?php echo $item['id']; ?>">Supprimer</a>
+                    <a class="btn btn-warning" href="plaintes.php?id=<?php echo $item['id']; ?>">Modifier</a>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
