@@ -17,6 +17,7 @@ $clients = $query->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clients</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="listeClients.css">
 </head>
 
 <body class="container">
@@ -29,9 +30,14 @@ $clients = $query->fetchAll();
     </div>
 </div>
 
-<a href="add_clients.php">
-    <button class="btn btn-info" onclick>Ajouter un client</button>
-</a>
+<div class="action-bar">
+    <div>
+        <a href="add_clients.php" class="btn btn-primary">Ajouter un client</a>
+    </div>
+    <div>
+        <a href="add_factures.php" class="btn btn-success">Créer une facture</a>
+    </div>
+</div
 
 <div class="row">
     <table class="table table-light">
@@ -56,10 +62,6 @@ $clients = $query->fetchAll();
         <?php } ?>
         </tbody>
     </table>
-
-    <a href="add_factures.php">
-        <button class="btn btn-secondary" onclick>Créer une facture</button>
-    </a>
 </div>
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire Création factures</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="formulaireFacture.css">
 </head>
 
 <?php
@@ -58,17 +59,18 @@ if (isset($_POST['id_clients']) && isset($_POST['montant']) && isset($_POST['pro
                     <label for="id_clients" class="form-label">* Client : </label>
                     <select class="form-select" id="id_clients" name="id_clients">
                         <option value="">Sélectionnez le client</option>
-                        <?php foreach ($clients as $client){ ?>
-                            <option value="<?php echo ($client['id_clients'])?>"
-                                <?php if (isset($_POST['id_clients']) && $_POST['id_clients'] == $client['id_clients']){
-                                    echo 'selected';}?>>
-                                <?php echo ($client['nom'].' '.$client['prenom'])?>
+                        <?php foreach ($clients as $client) { ?>
+                            <option value="<?php echo($client['id_clients']) ?>"
+                                    <?php if (isset($_POST['id_clients']) && $_POST['id_clients'] == $client['id_clients']) {
+                                        echo 'selected';
+                                    } ?>>
+                                <?php echo($client['nom'] . ' ' . $client['prenom']) ?>
                             </option>
                         <?php } ?>
                     </select>
                     <?php
                     if (isset($_POST['id_clients']) && empty($_POST['id_clients'])) {
-                        echo "Veuillez sélectionner un client.<br>";
+                        echo "<div class='text-danger'>Veuillez sélectionner un client.<br></div>";
                     }
                     ?>
                 </div>
@@ -78,11 +80,11 @@ if (isset($_POST['id_clients']) && isset($_POST['montant']) && isset($_POST['pro
                     <input type="text" class="form-control" id="montant" name="montant"
                            placeholder="entrez le montant de la facture"
                            value="<?php if (isset($_POST['montant'])) {
-                            echo $_POST['montant'];
+                               echo $_POST['montant'];
                            } ?>">
                     <?php
                     if (isset($_POST['montant']) && empty($_POST['montant'])) {
-                        echo "Le montant est vide.<br>";
+                        echo "<div class='text-danger'>Le montant est vide.<br></div>";
                     }
                     ?>
                 </div>
@@ -90,31 +92,35 @@ if (isset($_POST['id_clients']) && isset($_POST['montant']) && isset($_POST['pro
                 <div class="mb-3">
                     <label for="produits" class="form-label">* Produits commandés : </label>
                     <textarea class="form-control" id="produits" name="produits"
-                              placeholder="détaillez ici la commande" rows="5">
-                              <?php if (isset($_POST['produits'])) {
-                                echo $_POST['produits'];
-                              } ?></textarea>
+                              placeholder="détaillez ici la commande" rows="5"><?php
+                        if (isset($_POST['produits'])) {
+                            echo $_POST['produits'];
+                        } ?></textarea>
                     <?php
                     if (isset($_POST['produits']) && empty($_POST['produits'])) {
-                        echo "La description de la commande est vide.<br>";
+                        echo "<div class='text-danger'>La description de la commande est vide.<br></div>";
                     }
                     ?>
                 </div>
 
                 <div class="mb-3">
                     <label for="quantite" class="form-label">* Quantité : </label>
-                    <input type="number" class="form-control" id="quantite" name="quantite" placeholder="indiquez la quantité commandée"
+                    <input type="number" class="form-control" id="quantite" name="quantite"
+                           placeholder="indiquez la quantité commandée"
                            value="<?php if (isset($_POST['quantite'])) {
-                                    echo $_POST['quantite'];
+                               echo $_POST['quantite'];
                            } ?>">
                     <?php
                     if (isset($_POST['quantite']) && empty($_POST['quantite'])) {
-                        echo "La quantité est vide.<br>";
+                        echo "<div class='text-danger'>La quantité est vide.<br></div>";
                     }
                     ?>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Valider la facture</button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
+                    <a href="list_factures.php" class="btn btn-secondary">Retour</a>
+                    <button type="submit" class="btn btn-primary">Valider la facture</button>
+                </div>
                 <br>
             </form>
         </div>

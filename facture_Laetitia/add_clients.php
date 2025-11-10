@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire Création clients</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="formulaireClient.css">
 </head>
 
 <?php
 require_once 'config\db.php';
 
+/// vérifie que les données sont initialisées
 if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['sexe']) && isset($_POST['date_naissance'])) {
     $nom = $_POST ["nom"];
     $prenom = $_POST ["prenom"];
     $sexe = $_POST ["sexe"];
     $date_naissance = $_POST ["date_naissance"];
 
+    /// met les données dans la base de données
     if (!empty($nom) && !empty($prenom) && !empty($sexe) && !empty($date_naissance)) {
         global $bdd;
         $sql = "INSERT INTO clients (nom, prenom, sexe, date_naissance) VALUES (:nom, :prenom, :sexe, :date_naissance)";
@@ -77,7 +81,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['sexe']) && 
                 <div class="mb-3">
                     <label for="sexe" class="form-label">* Sexe : </label>
                     <select class="form-select" id="sexe" name="sexe">
-                        <option value="" selected disabled>--sélectionnez--</option>
+                        <option value="">--sélectionnez--</option>
                         <option value="H" <?php if (isset($_POST['sexe']) && $_POST['sexe'] == 'H') echo 'selected'; ?>>Homme</option>
                         <option value="F" <?php if (isset($_POST['sexe']) && $_POST['sexe'] == 'F') echo 'selected'; ?>>Femme</option>
                     </select>
@@ -101,7 +105,10 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['sexe']) && 
                     ?>
                 </div>
 
-                <button type="submit" class="btn btn-primary">S'enregistrer</button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
+                    <a href="list_clients.php" class="btn btn-secondary">Retour</a>
+                    <button type="submit" class="btn btn-primary">S'enregistrer</button>
+                </div>
                 <br>
             </form>
         </div>
