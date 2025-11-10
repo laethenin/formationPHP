@@ -7,7 +7,7 @@ $sql = "SELECT * FROM plaintes";
 $query = $bdd->query($sql);
 $plaintes = $query->fetchAll();
 
-if (isset($_GET['id']) && !empty($_GET['id'])) {
+if (isset($_GET['id']) && !empty($_GET['id']) && isset($_GET['action']) && $_GET['action'] == 'supprimer') {
     $id = $_GET['id'];
     $sql = "DELETE FROM plaintes WHERE id = :id";
     $query = $bdd->prepare($sql);
@@ -18,6 +18,39 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         exit();
     }
 }
+
+if (isset($_GET['id']) && !empty($_GET['id']) && isset($_GET['visible']) && isset($_GET['action']) && $_GET['action'] == "changerStatut") {
+    $visible=$_GET['visible'];
+    $id = $_GET['id'];
+    $sql = "UPDATE plaintes SET visible=:visible WHERE id = :id";
+    $update = $bdd->prepare($sql);
+    $verif = $update->execute([
+            'id' => $id,
+            'visible' => $visible?0:1,
+            ]);
+
+    if ($verif) {
+        header("Location:plaintes.php");
+        exit();
+    }
+}
+
+if (isset($_GET['id_selected'])){
+    $id_selected=$_GET['id_selected'];
+
+    if (count($id_selected)>0) {
+        $sql = "DELETE FROM plaintes WHERE id = :id";
+        $query = $bdd->prepare($sql);
+
+        foreach ($id_selected as $id_s) {
+            $query->execute(['id' => $id_s]);
+        }
+    }
+}
+
+$sql = "SELECT * FROM plaintes";
+$query = $bdd->query($sql);
+$plaintes = $query->fetchAll();
 ?>
 
 
@@ -39,12 +72,18 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     </div>
 </div>
 <a href="formulaire.php">
-    <button onclick>Ajouter une plainte</button>
+    <button class="btn btn-info" onclick>Ajouter une plainte</button>
 </a>
+
+<form action="plaintes.php" method="GET">
+    <button type="submit" class="btn btn-dark">Supprimer toute la sélection</button>
+
 <div class="row">
+
     <table class="table table-light">
         <thead>
         <tr>
+            <th>Sélectionner</th>
             <th>Id</th>
             <th>Nom</th>
             <th>Sujet</th>
@@ -57,6 +96,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <tbody>
         <?php foreach ($plaintes as $item) { ?>
             <tr>
+                <td>
+                    <input type="checkbox" name="id_selected[]" id="" value="<?php echo $item['id'];?>">
+                </td>
                 <td><?php echo $item['id']; ?></td>
                 <td><?php echo $item['nom']; ?></td>
                 <td><?php echo $item['sujet']; ?></td>
@@ -70,13 +112,15 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <?php } ?>
                 </td>
                 <td>
-                    <a class="btn btn-danger" href="plaintes.php?id=<?php echo $item['id']; ?>">Supprimer</a>
-                    <a class="btn btn-warning" href="plaintes.php?id=<?php echo $item['id']; ?>">Modifier</a>
+                    <a class="btn btn-danger" href="plaintes.php?id=<?php echo $item['id']; ?>&action=supprimer">Supprimer</a>
+                    <a class="btn btn-warning" href="edit_plainte.php?id=<?php echo $item['id']; ?>">Modifier</a>
+                    <a class="btn btn-secondary" href="plaintes.php?id=<?php echo $item['id']; ?>&visible=<?php echo $item['visible']; ?>&action=changerStatut">Changer le statut</a>
                 </td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
 </div>
+</form>
 </body>
 </html>
