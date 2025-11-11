@@ -25,13 +25,14 @@ if (isset($_POST['id_clients']) && isset($_POST['montant']) && isset($_POST['pro
 
     /// Insertion des données dans la table
     if (!empty($id_clients) && !empty($montant) && !empty($produits) && !empty($quantite)) {
-        $sql = "INSERT INTO factures (id_clients, montant, produits, quantite) VALUES (:id_clients, :montant, :produits, :quantite)";
+        $sql = "INSERT INTO factures (id_clients, montant, produits, quantite, date_facture) VALUES (:id_clients, :montant, :produits, :quantite, :date_facture)";
         $insert = $bdd->prepare($sql);
         $verif = $insert->execute([
                 "id_clients" => $id_clients,
                 "montant" => $montant,
                 "produits" => $produits,
-                "quantite" => $quantite
+                "quantite" => $quantite,
+                "date_facture"=>date('Y-m-d')
         ]);
         if ($verif) {
             header("Location:list_factures.php");
@@ -127,7 +128,7 @@ if (isset($_POST['id_clients']) && isset($_POST['montant']) && isset($_POST['pro
     </div>
 
     <footer class="text-center mt-4 text-black">
-        <p class="mb-0">© <?php echo date('Y'); ?> - Gestion des factures</p>
+        <p class="mb-0">© <?php echo date('Y'); ?> - Tokyu Hands</p>
     </footer>
 </div>
 

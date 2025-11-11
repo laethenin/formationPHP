@@ -142,7 +142,7 @@ if (isset($_GET['id_factures']) && !empty($_GET['id_factures'])) {
     </div>
 
     <footer class="text-center mt-4 text-black">
-        <p class="mb-0">© <?php echo date('Y'); ?> - Gestion des factures</p>
+        <p class="mb-0">© <?php echo date('Y'); ?> - Tokyu Hands</p>
     </footer>
 </div>
 

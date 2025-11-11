@@ -115,7 +115,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['sexe']) && 
     </div>
 
     <footer class="text-center mt-4 text-black">
-        <p class="mb-0">© <?php echo date('Y'); ?> - Gestion des clients</p>
+        <p class="mb-0">© <?php echo date('Y'); ?> - Tokyu Hands</p>
     </footer>
 </div>
 
