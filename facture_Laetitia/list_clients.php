@@ -48,6 +48,7 @@ $clients = $query->fetchAll();
             <th>Prénom</th>
             <th>Sexe</th>
             <th>Date de naissance</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -58,6 +59,8 @@ $clients = $query->fetchAll();
                 <td><?php echo $item['prenom']; ?></td>
                 <td><?php echo $item['sexe']; ?></td>
                 <td><?php echo $item['date_naissance']; ?></td>
+                <td><a class="btn btn-secondary"
+                       href="add_factures.php?id_clients=<?php echo $item['id_clients']; ?>">Créer une facture pour ce client</a></td>
             </tr>
         <?php } ?>
         </tbody>

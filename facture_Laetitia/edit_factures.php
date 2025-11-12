@@ -12,9 +12,9 @@
 global $bdd;
 require_once "config\db.php";
 
-// Récupération de certaines données de la table clients, stockées dans un tableau associatif
+// Récupération de certaines données de la table clients
 $stmt = $bdd->query("SELECT id_clients, nom, prenom FROM clients ORDER BY nom ASC");
-$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$clients = $stmt->fetchAll();
 
 // vérification qu'il y a bien les données
 if (isset($_POST['id_factures']) && isset($_POST['id_clients']) && isset($_POST['montant']) && isset($_POST['produits']) && isset($_POST['quantite'])) {

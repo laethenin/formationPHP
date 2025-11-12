@@ -26,7 +26,6 @@ $filtre_client = isset($_GET['client']) ? $_GET['client'] : 'tous';
 $date_debut = isset($_GET['date_debut']) ? $_GET['date_debut'] : '';
 $date_fin = isset($_GET['date_fin']) ? $_GET['date_fin'] : '';
 
-
 //// Récupération des données de la table factures et d'une partie de la table clients
 /// et jointure afin d'afficher le nom et prénom du client
 $sql = "SELECT factures.*, clients.nom, clients.prenom FROM factures
@@ -60,8 +59,8 @@ if (count($conditions) > 0) {
 $sql .= " ORDER BY factures.date_facture DESC";
 
 $query = $bdd->prepare($sql);
-$query->execute($params);
-$factures = $query->fetchAll(PDO::FETCH_ASSOC);
+$query->execute();
+$factures = $query->fetchAll();
 ?>
 
 <!DOCTYPE html>
